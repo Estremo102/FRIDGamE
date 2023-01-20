@@ -1,14 +1,4 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using FRIDGamE.Data;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("FRIDGamEContextConnection") ?? throw new InvalidOperationException("Connection string 'FRIDGamEContextConnection' not found.");
-
-builder.Services.AddDbContext<FRIDGamEContext>(options =>
-    options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<FRIDGamEContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -27,7 +17,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
 
 app.UseAuthorization();
 
