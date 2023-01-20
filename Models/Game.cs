@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FRIDGamE.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FRIDGamE.Models
 {
@@ -14,5 +15,6 @@ namespace FRIDGamE.Models
 
         public decimal RegularPrice { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public ISet<FRIDGamEUser> Owners { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace FRIDGamE.Areas.Identity.Data;
 public class FRIDGamEUser : IdentityUser
 {
     public ISet<News> News { get; set; } 
+    public ISet<Game> Games { get; set; }
+    public decimal Balance { get; set; }
 }
 

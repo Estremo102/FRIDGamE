@@ -25,6 +25,9 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
         builder.Entity<FRIDGamEUser>()
             .HasMany(e => e.News)
             .WithOne(e => e.Author);
+        builder.Entity<FRIDGamEUser>()
+            .HasMany(e => e.Games)
+            .WithMany(e => e.Owners);
 
         base.OnModelCreating(builder);
         // Customize the ASP.NET Identity model and override the defaults if needed.
