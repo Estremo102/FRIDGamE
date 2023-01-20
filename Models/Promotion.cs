@@ -15,7 +15,9 @@ namespace FRIDGamE.Models
         [Required(ErrorMessage = "Proszę podać twórców gry!")]
         public Developer GameStudio { get; set; }
         [Required(ErrorMessage = "Proszę podać wydawcę!")]
+        public int GameStudioId { get; set; }
         public Publisher GamePublisher { get; set; }
+        public int GamePublisherId { get; set; }
 
         public decimal RegularPrice { get; set; }
         [Range(1, 100, ErrorMessage = "Promocja musi wynosić pomiędzy 1% a 100%")]

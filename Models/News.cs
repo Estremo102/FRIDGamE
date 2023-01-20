@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FRIDGamE.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FRIDGamE.Models
@@ -13,5 +14,7 @@ namespace FRIDGamE.Models
         public DateTime AddDate { get; set; }
         public string Headline { get; set; }
         public string Content { get; set; }
+        public string AuthorId { get; set; }
+        public FRIDGamEUser Author { get; set; }
     }
 }
