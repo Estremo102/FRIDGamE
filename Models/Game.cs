@@ -1,11 +1,18 @@
 ﻿using FRIDGamE.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FRIDGamE.Models
 {
     public class Game
     {
-        [HiddenInput]
+        public Game()
+        {
+            Owners = new HashSet<FRIDGamEUser>();
+        }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string GameName { get; set; }
         public Developer Studio { get; set; }
