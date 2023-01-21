@@ -48,7 +48,7 @@ namespace FRIDGamE.Controllers
         // GET: Promotions/Create
         public IActionResult Create()
         {
-            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id");
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace FRIDGamE.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
             return View(promotion);
         }
 
@@ -82,7 +82,7 @@ namespace FRIDGamE.Controllers
             {
                 return NotFound();
             }
-            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
             return View(promotion);
         }
 
@@ -118,7 +118,7 @@ namespace FRIDGamE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
             return View(promotion);
         }
 
