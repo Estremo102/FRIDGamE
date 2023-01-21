@@ -15,6 +15,6 @@ namespace FRIDGamE.Models
         public string Headline { get; set; }
         public string Content { get; set; }
         public string AuthorId { get; set; }
-        public FRIDGamEUser Author { get; set; }
+        public FRIDGamEUser? Author { get; set; }
     }
 }
