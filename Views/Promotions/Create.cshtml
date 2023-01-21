@@ -1,4 +1,4 @@
-﻿@model FRIDGamE.Models.Game
+﻿@model FRIDGamE.Models.Promotion
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Game</h4>
+<h4>Promotion</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,17 +18,12 @@
                 <span asp-validation-for="GameName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudioId" class="control-label"></label>
-                <select asp-for="StudioId" class ="form-control" asp-items="ViewBag.StudioId"></select>
+                <label asp-for="GameStudioId" class="control-label"></label>
+                <select asp-for="GameStudioId" class ="form-control" asp-items="ViewBag.GameStudioId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="GamePublisherId" class="control-label"></label>
                 <select asp-for="GamePublisherId" class ="form-control" asp-items="ViewBag.GamePublisherId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RegularPrice" class="control-label"></label>
@@ -36,9 +31,14 @@
                 <span asp-validation-for="RegularPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndOfPromotion" class="control-label"></label>
+                <input asp-for="EndOfPromotion" class="form-control" />
+                <span asp-validation-for="EndOfPromotion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -12,6 +12,7 @@ namespace FRIDGamE.Models
         public int StudioId { get; set; }
         public Publisher GamePublisher { get; set; }
         public int GamePublisherId { get; set; }
+        public string Description { get; set; }
 
         public decimal RegularPrice { get; set; }
         public DateTime ReleaseDate { get; set; }

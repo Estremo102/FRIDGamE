@@ -10,94 +10,94 @@ using FRIDGamE.Models;
 
 namespace FRIDGamE.Controllers
 {
-    public class GamesController : Controller
+    public class PromotionsController : Controller
     {
         private readonly IdentityContext _context;
 
-        public GamesController(IdentityContext context)
+        public PromotionsController(IdentityContext context)
         {
             _context = context;
         }
 
-        // GET: Games
+        // GET: Promotions
         public async Task<IActionResult> Index()
         {
-            var identityContext = _context.Games.Include(g => g.GamePublisher).Include(g => g.Studio);
+            var identityContext = _context.Promotion.Include(p => p.GamePublisher).Include(p => p.GameStudio);
             return View(await identityContext.ToListAsync());
         }
 
-        // GET: Games/Details/5
+        // GET: Promotions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Games == null)
+            if (id == null || _context.Promotion == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Games
-                .Include(g => g.GamePublisher)
-                .Include(g => g.Studio)
+            var promotion = await _context.Promotion
+                .Include(p => p.GamePublisher)
+                .Include(p => p.GameStudio)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
+            if (promotion == null)
             {
                 return NotFound();
             }
 
-            return View(game);
+            return View(promotion);
         }
 
-        // GET: Games/Create
+        // GET: Promotions/Create
         public IActionResult Create()
         {
             ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName");
-            ViewData["StudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName");
+            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName");
             return View();
         }
 
-        // POST: Games/Create
+        // POST: Promotions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GameName,StudioId,GamePublisherId,Description,RegularPrice,ReleaseDate")] Game game)
+        public async Task<IActionResult> Create([Bind("Id,GameName,GameStudioId,GamePublisherId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(game);
+                _context.Add(promotion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", game.GamePublisherId);
-            ViewData["StudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", game.StudioId);
-            return View(game);
+            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
+            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            return View(promotion);
         }
 
-        // GET: Games/Edit/5
+        // GET: Promotions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Games == null)
+            if (id == null || _context.Promotion == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Games.FindAsync(id);
-            if (game == null)
+            var promotion = await _context.Promotion.FindAsync(id);
+            if (promotion == null)
             {
                 return NotFound();
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", game.GamePublisherId);
-            ViewData["StudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", game.StudioId);
-            return View(game);
+            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
+            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            return View(promotion);
         }
 
-        // POST: Games/Edit/5
+        // POST: Promotions/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GameName,StudioId,GamePublisherId,Description,RegularPrice,ReleaseDate")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GameName,GameStudioId,GamePublisherId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
         {
-            if (id != game.Id)
+            if (id != promotion.Id)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace FRIDGamE.Controllers
             {
                 try
                 {
-                    _context.Update(game);
+                    _context.Update(promotion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GameExists(game.Id))
+                    if (!PromotionExists(promotion.Id))
                     {
                         return NotFound();
                     }
@@ -122,53 +122,53 @@ namespace FRIDGamE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", game.GamePublisherId);
-            ViewData["StudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", game.StudioId);
-            return View(game);
+            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
+            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            return View(promotion);
         }
 
-        // GET: Games/Delete/5
+        // GET: Promotions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Games == null)
+            if (id == null || _context.Promotion == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Games
-                .Include(g => g.GamePublisher)
-                .Include(g => g.Studio)
+            var promotion = await _context.Promotion
+                .Include(p => p.GamePublisher)
+                .Include(p => p.GameStudio)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
+            if (promotion == null)
             {
                 return NotFound();
             }
 
-            return View(game);
+            return View(promotion);
         }
 
-        // POST: Games/Delete/5
+        // POST: Promotions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Games == null)
+            if (_context.Promotion == null)
             {
-                return Problem("Entity set 'IdentityContext.Games'  is null.");
+                return Problem("Entity set 'IdentityContext.Promotion'  is null.");
             }
-            var game = await _context.Games.FindAsync(id);
-            if (game != null)
+            var promotion = await _context.Promotion.FindAsync(id);
+            if (promotion != null)
             {
-                _context.Games.Remove(game);
+                _context.Promotion.Remove(promotion);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GameExists(int id)
+        private bool PromotionExists(int id)
         {
-          return _context.Games.Any(e => e.Id == id);
+          return _context.Promotion.Any(e => e.Id == id);
         }
     }
 }
