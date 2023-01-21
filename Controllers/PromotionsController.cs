@@ -22,7 +22,7 @@ namespace FRIDGamE.Controllers
         // GET: Promotions
         public async Task<IActionResult> Index()
         {
-            var identityContext = _context.Promotion.Include(p => p.GamePublisher).Include(p => p.GameStudio);
+            var identityContext = _context.Promotion.Include(p => p.GameName);
             return View(await identityContext.ToListAsync());
         }
 
@@ -35,8 +35,7 @@ namespace FRIDGamE.Controllers
             }
 
             var promotion = await _context.Promotion
-                .Include(p => p.GamePublisher)
-                .Include(p => p.GameStudio)
+                .Include(p => p.GameName)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (promotion == null)
             {
@@ -49,8 +48,7 @@ namespace FRIDGamE.Controllers
         // GET: Promotions/Create
         public IActionResult Create()
         {
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName");
-            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName");
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id");
             return View();
         }
 
@@ -59,7 +57,7 @@ namespace FRIDGamE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GameName,GameStudioId,GamePublisherId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
+        public async Task<IActionResult> Create([Bind("Id,GameNameId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +65,7 @@ namespace FRIDGamE.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
-            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
             return View(promotion);
         }
 
@@ -85,8 +82,7 @@ namespace FRIDGamE.Controllers
             {
                 return NotFound();
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
-            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
             return View(promotion);
         }
 
@@ -95,7 +91,7 @@ namespace FRIDGamE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GameName,GameStudioId,GamePublisherId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GameNameId,RegularPrice,Discount,EndOfPromotion")] Promotion promotion)
         {
             if (id != promotion.Id)
             {
@@ -122,8 +118,7 @@ namespace FRIDGamE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName", promotion.GamePublisherId);
-            ViewData["GameStudioId"] = new SelectList(_context.Developers, "Id", "DeveloperName", promotion.GameStudioId);
+            ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "Id", promotion.GameNameId);
             return View(promotion);
         }
 
@@ -136,8 +131,7 @@ namespace FRIDGamE.Controllers
             }
 
             var promotion = await _context.Promotion
-                .Include(p => p.GamePublisher)
-                .Include(p => p.GameStudio)
+                .Include(p => p.GameName)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (promotion == null)
             {
