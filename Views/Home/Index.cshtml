@@ -1,8 +1,47 @@
-﻿@{
+﻿@model IEnumerable<FRIDGamE.Models.News>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Aktualności</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AddDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Headline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is not null)
+        {
+            @foreach (var item in Model)
+            {
+                @if (item.AddDate <= DateTime.Now)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Headline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">Czytaj Dalej</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
