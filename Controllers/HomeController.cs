@@ -8,17 +8,6 @@ namespace FRIDGamE.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
         private readonly IdentityContext _context;
 
         public HomeController(IdentityContext context)
@@ -35,6 +24,25 @@ namespace FRIDGamE.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        // GET: News/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null || _context.News == null)
+            {
+                return NotFound();
+            }
+
+            var news = _context.News
+                .Include(n => n.Author)
+                .FirstOrDefault(m => m.Id == id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+
+            return View(news);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
