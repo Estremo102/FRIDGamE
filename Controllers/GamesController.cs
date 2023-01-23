@@ -166,6 +166,26 @@ namespace FRIDGamE.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Buy(int? id)
+        {
+            if (id == null || _context.Games == null)
+            {
+                return NotFound();
+            }
+
+            var game = await _context.Games
+                .Include(g => g.GamePublisher)
+                .Include(g => g.Studio)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return View(game);
+        }
+
+
         private bool GameExists(int id)
         {
           return _context.Games.Any(e => e.Id == id);

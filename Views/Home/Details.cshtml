@@ -1,34 +1,21 @@
 ﻿@model FRIDGamE.Models.News
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Headline;
 }
 
-<h1>Details</h1>
+<h1>
+    @Html.DisplayFor(model => model.Headline)
+</h1>
 
 <div>
-    <h4>News</h4>
+    <h4>
+        @Html.DisplayFor(model => model.AddDate)
+    </h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AddDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AddDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Headline)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Headline)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-    </dl>
+    <div>
+        @Html.DisplayFor(model => model.Content)
+    </div>
 </div>
 <div>
     <a asp-action="Index">Back to List</a>

@@ -1,0 +1,48 @@
+﻿@model FRIDGamE.Models.Game
+
+@{
+    ViewData["Title"] = "Kup grę";
+}
+
+<h1>@Html.DisplayFor(model => model.GameName)</h1>
+
+<div>
+    <h4>Szczegółowe informacje</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Studio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Studio.DeveloperName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GamePublisher)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GamePublisher.PublisherName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegularPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegularPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="BuyConfirm" asp-route-id="@Model?.Id">Kup</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

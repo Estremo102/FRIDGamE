@@ -4,44 +4,15 @@
 }
 
 <h1>Aktualności</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AddDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Headline)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model is not null)
+@if (Model is not null)
+{
+    @foreach (var item in Model)
+    {
+        @if (item.AddDate <= DateTime.Now)
         {
-            @foreach (var item in Model)
-            {
-                @if (item.AddDate <= DateTime.Now)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AddDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Headline)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Content)
-                        </td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@item.Id">Czytaj Dalej</a>
-                        </td>
-                    </tr>
-                }
-            }
+            <h2>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Headline)</a>
+            </h2>
         }
-    </tbody>
-</table>
+    }
+}
