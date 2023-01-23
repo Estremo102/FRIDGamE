@@ -48,7 +48,7 @@ namespace FRIDGamE.Controllers
         // GET: News/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
