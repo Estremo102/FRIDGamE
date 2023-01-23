@@ -30,25 +30,45 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GameName.GameName)
-                </td>
-                <td>
-                    <s>@Html.DisplayFor(modelItem => item.RegularPrice)</s> @(item.RegularPrice*item.Discount/100)
-                </td>
-                <td>
-                    -@Html.DisplayFor(modelItem => item.Discount)%
-                </td>
-                <td>
-                    Promocja kończy się za @((item.EndOfPromotion-DateTime.Now).Days) dni
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            @if ((item.EndOfPromotion - DateTime.Now).Days >= 0)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GameName.GameName)
+                    </td>
+                    <td>
+                        <s>@Html.DisplayFor(modelItem => item.RegularPrice)zł</s> @(item.RegularPrice-(item.RegularPrice * item.Discount / 100))zł
+                    </td>
+                    <td>
+                        -@Html.DisplayFor(modelItem => item.Discount)%
+                    </td>
+                    <td>
+                        @if ((item.EndOfPromotion - DateTime.Now).Days > 1)
+                        {
+                            <div>
+                                Promocja kończy się za @((item.EndOfPromotion - DateTime.Now).Days) dni
+                            </div>
+                        }
+                        else if ((item.EndOfPromotion - DateTime.Now).Days == 1)
+                        {
+                            <div>
+                                Promocja kończy się jutro
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                Promocja kończy się dziś
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
