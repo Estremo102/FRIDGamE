@@ -60,6 +60,10 @@ namespace FRIDGamE.Controllers
         public async Task<IActionResult> Create([Bind("Id,GameNameId,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
         {
             promotion.RegularPrice = _context.Games.Find(promotion.GameNameId).RegularPrice;
+            if (promotion.StartOfPromotion is null)
+            {
+                promotion.StartOfPromotion = DateTime.Now;
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(promotion);
@@ -156,14 +160,14 @@ namespace FRIDGamE.Controllers
             {
                 _context.Promotion.Remove(promotion);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PromotionExists(int id)
         {
-          return _context.Promotion.Any(e => e.Id == id);
+            return _context.Promotion.Any(e => e.Id == id);
         }
     }
 }

@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<FRIDGamE.Models.Publisher>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wydawcy";
 }
 
-<h1>Index</h1>
+<h1>WYDAWCY</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowe dane wydawcy</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PublisherName)
+                Nazwa firmy
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NIP)

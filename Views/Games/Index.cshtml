@@ -7,31 +7,9 @@
 <h1>SKLEP</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nową grę</a>
 </p>
-<table class="table">@*
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.GameName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GamePublisher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegularPrice)
-            </th>
-            <th>
-            </th>
-            <th></th>
-        </tr>
-    </thead>*@
+<table class="table">
     <tbody>
         @foreach (var item in Model)
         {
@@ -39,15 +17,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GameName)
                 </td>
-               @* <td>
-                    @Html.DisplayFor(modelItem => item.Studio.DeveloperName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GamePublisher.PublisherName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.RegularPrice)zł
                 </td>
