@@ -1,5 +1,4 @@
-﻿using FRIDGamE.Areas.Identity.Data;
-using FRIDGamE.Models;
+﻿using FRIDGamE.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +20,15 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<IdentityRole>().HasData(
+            new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole() { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" }
+            );
 
-        builder.Entity<FRIDGamEUser>()
+        builder.Entity<Customer>()
             .HasMany(e => e.News)
             .WithOne(e => e.Author);
-        builder.Entity<FRIDGamEUser>()
+        builder.Entity<Customer>()
             .HasMany(e => e.Games)
             .WithMany(e => e.Owners);
 
@@ -141,6 +144,8 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
                     ReleaseDate = new DateTime(2023, 9, 11)
                 }
             );
+
+
 
         base.OnModelCreating(builder);
         // Customize the ASP.NET Identity model and override the defaults if needed.

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FRIDGamE.Areas.Identity.Data;
 using FRIDGamE.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FRIDGamE.Controllers
 {
@@ -47,6 +48,8 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Games/Create
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["GamePublisherId"] = new SelectList(_context.Publishers, "Id", "PublisherName");
@@ -161,7 +164,7 @@ namespace FRIDGamE.Controllers
             {
                 _context.Games.Remove(game);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -188,7 +191,7 @@ namespace FRIDGamE.Controllers
 
         private bool GameExists(int id)
         {
-          return _context.Games.Any(e => e.Id == id);
+            return _context.Games.Any(e => e.Id == id);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FRIDGamE.Areas.Identity.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +8,7 @@ namespace FRIDGamE.Models
     {
         public Game()
         {
-            Owners = new HashSet<FRIDGamEUser>();
+            Owners = new HashSet<Customer>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,6 +23,6 @@ namespace FRIDGamE.Models
 
         public decimal RegularPrice { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public ISet<FRIDGamEUser> Owners { get; set; }
+        public ISet<Customer> Owners { get; set; }
     }
 }

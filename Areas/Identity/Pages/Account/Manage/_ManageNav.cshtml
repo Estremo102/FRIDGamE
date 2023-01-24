@@ -1,4 +1,5 @@
-﻿@inject SignInManager<FRIDGamEUser> SignInManager
+﻿@using FRIDGamE.Models
+@inject SignInManager<FRIDGamEUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
