@@ -76,6 +76,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Games/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Games == null)
@@ -131,6 +132,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Games/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Games == null)
@@ -169,6 +171,7 @@ namespace FRIDGamE.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public async Task<IActionResult> Buy(int? id)
         {
             if (id == null || _context.Games == null)

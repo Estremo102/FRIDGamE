@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FRIDGamE.Areas.Identity.Data;
 using FRIDGamE.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace FRIDGamE.Controllers
 {
@@ -46,6 +48,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Promotions/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName");
@@ -96,6 +99,7 @@ namespace FRIDGamE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,GameNameId,RegularPrice,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
         {
             if (id != promotion.Id)
@@ -128,6 +132,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Promotions/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Promotion == null)

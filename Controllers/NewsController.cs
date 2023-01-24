@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FRIDGamE.Areas.Identity.Data;
 using FRIDGamE.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace FRIDGamE.Controllers
 {
@@ -46,6 +48,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: News/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "UserName");
@@ -70,6 +73,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: News/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.News == null)
@@ -123,6 +127,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: News/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.News == null)
