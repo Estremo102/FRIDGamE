@@ -57,8 +57,9 @@ namespace FRIDGamE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GameNameId,RegularPrice,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
+        public async Task<IActionResult> Create([Bind("Id,GameNameId,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
         {
+            promotion.RegularPrice = _context.Games.Find(promotion.GameNameId).RegularPrice;
             if (ModelState.IsValid)
             {
                 _context.Add(promotion);

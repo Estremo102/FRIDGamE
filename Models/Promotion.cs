@@ -20,6 +20,6 @@ namespace FRIDGamE.Models
         [DataType(DataType.Date)]
         public DateTime EndOfPromotion { get; set; }
         [DataType(DataType.Date)]
-        public DateTime? StartOfPromotion { get; }
+        public DateTime? StartOfPromotion { get; set; }
     }
 }

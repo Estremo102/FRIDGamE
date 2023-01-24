@@ -19,6 +19,8 @@ namespace FRIDGamE.Models
         public string DeveloperName { get; set; }
         [Column("nip")]
         [StringLength(10)]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string NIP { get; set; }
         public ISet<Game> games { get; set; }
     }
