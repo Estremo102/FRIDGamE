@@ -29,6 +29,8 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
             .HasMany(e => e.Games)
             .WithMany(e => e.Owners);
 
+        
+
         base.OnModelCreating(builder);
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
