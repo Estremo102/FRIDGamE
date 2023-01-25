@@ -482,15 +482,15 @@ namespace FRIDGamE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dbed936d-e515-4e03-a577-3c860f95ef26",
-                            ConcurrencyStamp = "2ba8dc4b-896e-4612-8b17-87e99d4cd605",
+                            Id = "34cb5842-05fe-4502-80ea-acddac81ec1e",
+                            ConcurrencyStamp = "f8f346f5-622c-4474-a4df-bb84a34eac95",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bec561d7-cb44-4130-8afc-92a63afe293b",
-                            ConcurrencyStamp = "e01d4858-8d16-4693-b3b8-8dc6dbe8a105",
+                            Id = "a1b6d163-549c-44fc-a0a6-5a15596c0470",
+                            ConcurrencyStamp = "7a1b4bb6-ddd7-4fa2-98bb-324c4b8a8730",
                             Name = "User",
                             NormalizedName = "USER"
                         });

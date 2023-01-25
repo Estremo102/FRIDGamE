@@ -2,6 +2,12 @@
 {
     public class Customer
     {
+        public Customer()
+        {
+            Games = new HashSet<Game>();
+            News = new HashSet<News>();
+        }
+
         public Guid CustomerId { get; set; }
         public string? IdentityUserId { get; set; }
         public FRIDGamEUser? IdentityUser { get; set; }

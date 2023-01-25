@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FRIDGamE.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -297,6 +297,15 @@ namespace FRIDGamE.Migrations
                         principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "34cb5842-05fe-4502-80ea-acddac81ec1e", "f8f346f5-622c-4474-a4df-bb84a34eac95", "Admin", "ADMIN" },
+                    { "a1b6d163-549c-44fc-a0a6-5a15596c0470", "7a1b4bb6-ddd7-4fa2-98bb-324c4b8a8730", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
