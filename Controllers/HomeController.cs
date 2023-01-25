@@ -2,6 +2,7 @@
 using FRIDGamE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.Entity;
 using System.Diagnostics;
 
@@ -47,9 +48,22 @@ namespace FRIDGamE.Controllers
         }
 
         [Authorize]
-        public IActionResult Account()
+        public async Task<IActionResult> Account(Guid? id)
         {
-            return View();
+            if (id == null || _context.Customer == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customer
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
