@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 
 namespace FRIDGamE.Controllers
@@ -61,6 +62,41 @@ namespace FRIDGamE.Controllers
                 return NotFound();
             }
 
+            return View(customer);
+        }
+
+        [Authorize]
+        public IActionResult Payment(string? id)
+        {
+            if (id == null || _context.Customer == null)
+            {
+                return NotFound();
+            }
+
+            var news = _context.Customer.Find(Guid.Parse(id));
+            if (news == null)
+            {
+                return NotFound();
+            }
+            return View(news);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Payment(Guid id, Customer customer)
+        {
+            if (id != customer.CustomerId)
+            {
+                return NotFound();
+            }
+            var cust2 = _context.Customer.Find(id);
+            cust2.Balance += customer.Balance;
+            if (ModelState.IsValid)
+            {
+                _context.Customer.Update(cust2);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
             return View(customer);
         }
 
