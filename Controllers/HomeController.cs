@@ -48,9 +48,20 @@ namespace FRIDGamE.Controllers
         }
 
         [Authorize]
-        public IActionResult Account()
+        public IActionResult Account(string? id)
         {
-            return View();
+            if (id == null || _context.Customer == null)
+            {
+                return NotFound();
+            }
+
+            var customer = _context.Customer.Find(Guid.Parse(id));
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
