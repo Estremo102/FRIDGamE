@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using FRIDGamE.Models;
+using FRIDGamE.Areas.Identity.Data;
 
 namespace FRIDGamE.Areas.Identity.Pages.Account
 {
@@ -29,11 +30,13 @@ namespace FRIDGamE.Areas.Identity.Pages.Account
         private readonly IUserStore<FRIDGamEUser> _userStore;
         private readonly IUserEmailStore<FRIDGamEUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly IdentityContext _context;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<FRIDGamEUser> userManager,
             IUserStore<FRIDGamEUser> userStore,
+            IdentityContext identityContext,
             SignInManager<FRIDGamEUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
@@ -44,6 +47,7 @@ namespace FRIDGamE.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = identityContext;
         }
 
         /// <summary>
@@ -124,6 +128,18 @@ namespace FRIDGamE.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    var customer = new Customer()
+                    {
+                        CustomerId = Guid.Parse(userId),
+                        IdentityUserId = userId,
+                        Balance = 0
+                    };
+                    await _context.SaveChangesAsync();
+                    await _userManager.AddToRoleAsync(user, "User");
+                    _context.Customer.Add(customer);
+                    _context.SaveChanges();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
