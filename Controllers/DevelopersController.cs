@@ -22,6 +22,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Developers
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.Developers.ToListAsync());

@@ -15,4 +15,14 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #202020;
+  color: #EEEEEE;
+}
+
+td{
+    color:#EEEEEE;
+}
+
+th{
+    color:#BBBBBB;
 }

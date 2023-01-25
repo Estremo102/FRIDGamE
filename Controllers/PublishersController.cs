@@ -22,6 +22,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: Publishers
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.Publishers.ToListAsync());

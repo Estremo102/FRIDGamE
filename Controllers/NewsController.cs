@@ -9,6 +9,7 @@ using FRIDGamE.Areas.Identity.Data;
 using FRIDGamE.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace FRIDGamE.Controllers
 {
@@ -22,6 +23,7 @@ namespace FRIDGamE.Controllers
         }
 
         // GET: News
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var identityContext = _context.News.Include(n => n.Author);

@@ -1,14 +1,20 @@
-﻿@model IEnumerable<FRIDGamE.Models.Game>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<FRIDGamE.Models.Game>
+@inject UserManager<FRIDGamEUser> UserManager
 
 @{
     ViewData["Title"] = "Sklep";
 }
 
 <h1>SKLEP</h1>
-
-<p>
-    <a asp-action="Create">Dodaj nową grę</a>
-</p>
+@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+{
+    <p>
+        <a asp-action="Create">Dodaj nową grę</a>
+    </p>
+}
 <table class="table">
     <tbody>
         @foreach (var item in Model)
@@ -30,12 +36,22 @@
                 {
                     <td></td>
                 }
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
-                    <a asp-action="Buy" asp-route-id="@item.Id">Kup</a>
-                </td>
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
+                        <a asp-action="Buy" asp-route-id="@item.Id">Kup</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                        <a asp-action="Buy" asp-route-id="@item.Id">Kup</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
