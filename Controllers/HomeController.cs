@@ -1,5 +1,6 @@
 ﻿using FRIDGamE.Areas.Identity.Data;
 using FRIDGamE.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -43,6 +44,12 @@ namespace FRIDGamE.Controllers
             }
 
             return View(news);
+        }
+
+        [Authorize]
+        public IActionResult Account()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

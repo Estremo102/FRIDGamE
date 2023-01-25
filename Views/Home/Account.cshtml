@@ -1,0 +1,31 @@
+﻿@model FRIDGamE.Models.Customer
+
+@{
+    ViewData["Title"] = "Konto";
+}
+
+<h1>Biblioteka</h1>
+
+<div>
+    <h4>Posiadane gry</h4>
+    <hr />
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdentityUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdentityUser.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Balance" asp-route-id="@Model?.CustomerId">Wpłać środki</a>
+</div>

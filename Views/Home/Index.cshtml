@@ -1,9 +1,14 @@
-﻿@model IEnumerable<FRIDGamE.Models.News>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<FRIDGamE.Models.News>
+@inject UserManager<FRIDGamEUser> UserManager
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Aktualności</h1>
+<h1>AKTUALNOŚCI</h1>
 @if (Model is not null)
 {
     @foreach (var item in Model)
@@ -12,6 +17,12 @@
         {
             <h2>
                 <a class="border-white text-light" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Headline)</a>
+            </h2>
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+        {
+            <h2>
+                <a class="border-gray text-secondary" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Headline)</a>
             </h2>
         }
     }

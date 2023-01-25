@@ -15,17 +15,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AddDate" class="control-label"></label>
-                <input asp-for="AddDate" class="form-control" />
+                <input asp-for="AddDate" class="bg-dark text-light form-control" />
                 <span asp-validation-for="AddDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Headline" class="control-label"></label>
-                <input asp-for="Headline" class="form-control" />
+                <input asp-for="Headline" class="bg-dark text-light form-control" />
                 <span asp-validation-for="Headline" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <input asp-for="Content" class="bg-dark text-light form-control" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="AuthorId" value="@UserManager.GetUserId(User)" />
@@ -42,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Powrót</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Powrót</a>
 </div>
 
 @section Scripts {

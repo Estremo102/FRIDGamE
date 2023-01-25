@@ -154,4 +154,6 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
     }
 
     public DbSet<FRIDGamE.Models.Promotion> Promotion { get; set; }
+
+    public DbSet<FRIDGamE.Models.Customer> Customer { get; set; }
 }
