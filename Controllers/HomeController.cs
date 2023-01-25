@@ -48,22 +48,9 @@ namespace FRIDGamE.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Account(Guid? id)
+        public IActionResult Account()
         {
-            if (id == null || _context.Customer == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customer
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
