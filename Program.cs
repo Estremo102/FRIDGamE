@@ -15,7 +15,7 @@ builder.Services.AddDefaultIdentity<FRIDGamEUser>(options => options.SignIn.Requ
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IPublisherService, PublisherServiceEF>();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));

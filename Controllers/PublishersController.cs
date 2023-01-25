@@ -14,35 +14,27 @@ namespace FRIDGamE.Controllers
 {
     public class PublishersController : Controller
     {
-        private readonly IdentityContext _context;
+        //private readonly IdentityContext _context;
+        private readonly IPublisherService _publisherService;
 
-        public PublishersController(IdentityContext context)
+        public PublishersController(IdentityContext context, IPublisherService publisherService)
         {
-            _context = context;
+            //_context = context;
+            _publisherService = publisherService;
         }
 
         // GET: Publishers
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Index()
-        {
-              return View(await _context.Publishers.ToListAsync());
-        }
+        public IActionResult Index() => View(_publisherService.FindAll());
 
         // GET: Publishers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Publishers == null)
+            var publisher = _publisherService.FindById(id);
+            if (publisher is null)
             {
                 return NotFound();
             }
-
-            var publisher = await _context.Publishers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (publisher == null)
-            {
-                return NotFound();
-            }
-
             return View(publisher);
         }
 
@@ -62,8 +54,7 @@ namespace FRIDGamE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(publisher);
-                await _context.SaveChangesAsync();
+                _publisherService.Save(publisher);
                 return RedirectToAction(nameof(Index));
             }
             return View(publisher);
@@ -71,14 +62,14 @@ namespace FRIDGamE.Controllers
 
         // GET: Publishers/Edit/5
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Publishers == null)
+            if (id == null || _publisherService.FindById(id) is null)
             {
                 return NotFound();
             }
 
-            var publisher = await _context.Publishers.FindAsync(id);
+            var publisher = _publisherService.FindById(id);
             if (publisher == null)
             {
                 return NotFound();
@@ -91,7 +82,7 @@ namespace FRIDGamE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PublisherName,NIP")] Publisher publisher)
+        public IActionResult Edit(int id, [Bind("Id,PublisherName,NIP")] Publisher publisher)
         {
             if (id != publisher.Id)
             {
@@ -102,8 +93,7 @@ namespace FRIDGamE.Controllers
             {
                 try
                 {
-                    _context.Update(publisher);
-                    await _context.SaveChangesAsync();
+                    _publisherService.Update(publisher);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,15 +113,14 @@ namespace FRIDGamE.Controllers
 
         // GET: Publishers/Delete/5
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-            if (id == null || _context.Publishers == null)
+            if (id == null || _publisherService.FindById(id) == null)
             {
                 return NotFound();
             }
 
-            var publisher = await _context.Publishers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var publisher = _publisherService.FindById(id);
             if (publisher == null)
             {
                 return NotFound();
@@ -143,25 +132,16 @@ namespace FRIDGamE.Controllers
         // POST: Publishers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            if (_context.Publishers == null)
+            if (_publisherService.FindById(id) == null)
             {
                 return Problem("Entity set 'IdentityContext.Publishers'  is null.");
             }
-            var publisher = await _context.Publishers.FindAsync(id);
-            if (publisher != null)
-            {
-                _context.Publishers.Remove(publisher);
-            }
-            
-            await _context.SaveChangesAsync();
+            _publisherService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PublisherExists(int id)
-        {
-          return _context.Publishers.Any(e => e.Id == id);
-        }
+        private bool PublisherExists(int id) => _publisherService.FindById(id) != null;
     }
 }
