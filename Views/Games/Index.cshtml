@@ -12,7 +12,7 @@
 @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
 {
     <p>
-        <a asp-action="Create">Dodaj nową grę</a>
+        <a class="btn btn-success" asp-action="Create">Dodaj nową grę</a>
     </p>
 }
 <table class="table">
@@ -39,17 +39,17 @@
                 @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
                 {
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
-                        <a asp-action="Buy" asp-route-id="@item.Id">Kup</a>
+                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edytuj</a>
+                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">Szczegóły</a>
+                        <a asp-action="Delete" class="btn btn-danger"asp-route-id="@item.Id">Usuń</a>
+                        <a asp-action="Buy" class="btn btn-success" asp-route-id="@item.Id">Kup</a>
                     </td>
                 }
                 else
                 {
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                        <a asp-action="Buy" asp-route-id="@item.Id">Kup</a>
+                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">Szczegóły</a>
+                        <a asp-action="Buy" class="btn btn-success" asp-route-id="@item.Id">Kup</a>
                     </td>
                 }
             </tr>

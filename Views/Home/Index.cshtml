@@ -11,7 +11,7 @@
         @if (item.AddDate <= DateTime.Now)
         {
             <h2>
-                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Headline)</a>
+                <a class="border-white text-light" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Headline)</a>
             </h2>
         }
     }

@@ -9,7 +9,7 @@
 </h1>
 
 <div>
-    <h4><s>@Html.DisplayFor(model => model.RegularPrice)zł</s> @(Model.RegularPrice - (Model.RegularPrice * Model.Discount / 100))zł</h4>
+    <h4><s>@Html.DisplayFor(model => model.RegularPrice)zł</s> @(Math.Round(Model.RegularPrice - (Model.RegularPrice * Model.Discount) / 100))zł</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -21,6 +21,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj</a> |
-    <a asp-action="Index">Powrót</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edytuj</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Powrót</a>
 </div>

@@ -16,27 +16,27 @@
             <input type="hidden" asp-for="GameName" />
             <div class="form-group">
                 <label asp-for="StudioId" class="control-label"></label>
-                <select asp-for="StudioId" class="form-control" asp-items="ViewBag.StudioId"></select>
+                <select asp-for="StudioId" class="bg-dark text-light form-control" asp-items="ViewBag.StudioId"></select>
                 <span asp-validation-for="StudioId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GamePublisherId" class="control-label"></label>
-                <select asp-for="GamePublisherId" class="form-control" asp-items="ViewBag.GamePublisherId"></select>
+                <select asp-for="GamePublisherId" class="bg-dark text-light form-control" asp-items="ViewBag.GamePublisherId"></select>
                 <span asp-validation-for="GamePublisherId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <input asp-for="Description" class="bg-dark text-light form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RegularPrice" class="control-label"></label>
-                <input asp-for="RegularPrice" class="form-control" />
+                <input asp-for="RegularPrice" class="bg-dark text-light form-control" />
                 <span asp-validation-for="RegularPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
+                <input asp-for="ReleaseDate" class="bg-dark text-light form-control" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Powrót</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Powrót</a>
 </div>
 
 @section Scripts {

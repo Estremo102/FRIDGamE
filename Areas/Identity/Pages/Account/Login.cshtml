@@ -14,19 +14,19 @@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <input asp-for="Input.Email" class="bg-dark text-light form-control" autocomplete="username" aria-required="true" />
                     <label asp-for="Input.Email" class="form-label"></label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <input asp-for="Input.Password" class="bg-dark text-light form-control" autocomplete="current-password" aria-required="true" />
                     <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <input class="bg-dark border-light form-check-input" asp-for="Input.RememberMe" />
                             Zapamiętaj mnie
                         </label>
                     </div>
@@ -36,13 +36,13 @@
                 </div>
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
+                        <a id="forgot-password" class="text-secondary" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Nie masz konta? Zarejestruj</a>
+                        <a asp-page="./Register" class="text-secondary" asp-route-returnUrl="@Model.ReturnUrl">Nie masz konta? Zarejestruj</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Wyślij maila weryfikacyjnego ponownie</a>
+                        <a id="resend-confirmation" class="text-secondary" asp-page="./ResendEmailConfirmation">Wyślij maila weryfikacyjnego ponownie</a>
                     </p>
                 </div>
             </form>
