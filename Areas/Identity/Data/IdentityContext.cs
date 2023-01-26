@@ -22,31 +22,6 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
     {
     }
 
-    public List<string> Library(string id)
-    {
-        string query = $"SELECT TOP (1000) [FRIDGamE].[dbo].[Games].[GameName] FROM [FRIDGamE].[dbo].[CustomerGame] LEFT JOIN [FRIDGamE].[dbo].[Games] ON [FRIDGamE].[dbo].[Games].Id = [FRIDGamE].[dbo].[CustomerGame].[GamesId] WHERE [FRIDGamE].[dbo].[CustomerGame].OwnersCustomerId = '{id}'";
-        using (SqlConnection connection = new SqlConnection("Server=DESKTOP-7KQ5544;Database=FRIDGamE;Trusted_Connection=True;MultipleActiveResultSets=true"))
-        {
-            SqlCommand command = new SqlCommand(query, connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-            List<string> list = new List<string>();
-            try
-            {
-                while (reader.Read())
-                {
-                    list.Add(reader.GetString(0));
-                }
-            }
-            finally
-            {
-                // Always call Close when done reading.
-                reader.Close();
-            }
-            return list;
-        }
-    }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<IdentityRole>().HasData(

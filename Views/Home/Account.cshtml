@@ -8,7 +8,7 @@
 
 <div>
     <h4>Posiadane gry</h4>
-    @if (((List<string>)ViewData["Games"]).Count == 0)
+    @if (Model.Games.Count == 0)
     {
         <div>
             Brak posiadanych gier
@@ -16,9 +16,11 @@
     }
     else
     {
-        @foreach (var item in (List<string>)ViewData["Games"])
+        foreach (var item in Model.Games)
         {
-            <div>@item</div>
+            <div>
+                @item.GameName
+            </div>
         }
     }
 
