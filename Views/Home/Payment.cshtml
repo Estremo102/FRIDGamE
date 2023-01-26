@@ -1,4 +1,8 @@
-﻿@model FRIDGamE.Models.Customer
+﻿@using Microsoft.AspNetCore.Identity
+@using FRIDGamE.Areas.Identity.Data
+
+@model FRIDGamE.Models.Customer
+@inject UserManager<FRIDGamEUser> UserManager
 
 @{
     ViewData["Title"] = "Payment";
@@ -28,7 +32,7 @@
 </div>
 
 <div>
-    <a class="btn btn-outline-primary" asp-action="Account">Anuluj</a>
+    <a class="btn btn-outline-primary" asp-action="Account" asp-route-id="@UserManager.GetUserId(User)">Anuluj</a>
 </div>
 
 @section Scripts {
