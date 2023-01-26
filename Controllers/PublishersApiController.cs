@@ -14,95 +14,80 @@ namespace FRIDGamE.Controllers
     [ApiController]
     public class PublishersApiController : ControllerBase
     {
-        private readonly IdentityContext _context;
+        //private readonly IdentityContext _context;
+        private readonly IPublisherService _publisherService;
 
-        public PublishersApiController(IdentityContext context)
+        //public PublishersApiController(IdentityContext context)
+        //{
+        //    _context = context;
+        //}
+
+        public PublishersApiController(IPublisherService service)
         {
-            _context = context;
+            _publisherService = service;
         }
 
         // GET: api/PublishersApi
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishers()
-        {
-            return await _context.Publishers.ToListAsync();
-        }
+        public IEnumerable<Publisher> GetPublishers() => _publisherService.FindAll();
 
         // GET: api/PublishersApi/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Publisher>> GetPublisher(int id)
+        public ActionResult<Publisher> GetPublisher(int id)
         {
-            var publisher = await _context.Publishers.FindAsync(id);
-
+            var publisher = _publisherService.FindById(id);
             if (publisher == null)
             {
                 return NotFound();
             }
-
             return publisher;
         }
 
         // PUT: api/PublishersApi/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPublisher(int id, Publisher publisher)
+        public ActionResult<Publisher> PutPublisher([FromBody]Publisher publisher)
         {
-            if (id != publisher.Id)
+            if(!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
-            _context.Entry(publisher).State = EntityState.Modified;
-
-            try
+            if(_publisherService.Update(publisher))
             {
-                await _context.SaveChangesAsync();
+                return Ok(publisher);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PublisherExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return NotFound();
         }
 
         // POST: api/PublishersApi
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Publisher>> PostPublisher(Publisher publisher)
-        {
-            _context.Publishers.Add(publisher);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPublisher", new { id = publisher.Id }, publisher);
+        public ActionResult<Publisher> PostPublisher(Publisher publisher)
+        { 
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _publisherService.Save(publisher);
+            return Created($"/api/PublishersApi/{publisher.Id}", publisher);
         }
 
         // DELETE: api/PublishersApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePublisher(int id)
+        public ActionResult<Publisher> DeletePublisher(int id)
         {
-            var publisher = await _context.Publishers.FindAsync(id);
+            var publisher = _publisherService.FindById(id);
             if (publisher == null)
             {
                 return NotFound();
             }
-
-            _context.Publishers.Remove(publisher);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            if(_publisherService.Delete(id))
+            {
+                return NoContent();
+            }
+            return NotFound();
         }
 
-        private bool PublisherExists(int id)
-        {
-            return _context.Publishers.Any(e => e.Id == id);
-        }
+        private bool PublisherExists(int id) => _publisherService.FindById(id) != null;
     }
 }
