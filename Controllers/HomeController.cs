@@ -61,6 +61,7 @@ namespace FRIDGamE.Controllers
             //var account = _context.Customer.Include(c => c.Games).ToList();
             //var customer = account.First(c => c.CustomerId == Guid.Parse(id));
             var customer = _context.Customer.Find(Guid.Parse(id));
+            ViewData["Games"] = _context.Library(id);
             if (customer == null)
             {
                 return NotFound();
