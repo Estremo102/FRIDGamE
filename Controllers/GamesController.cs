@@ -191,6 +191,24 @@ namespace FRIDGamE.Controllers
             return View(game);
         }
 
+        public IActionResult BuyConfirmed(int gameId, Guid userId)
+        {
+            if (_context.Games == null)
+            {
+                return Problem("Entity set 'IdentityContext.Games'  is null.");
+            }
+            Game? game = _context.Games.Find(gameId);
+            Customer? user = _context.Customer.Find(userId);
+            if (user == null || game == null)
+            {
+                return NotFound();
+            }
+            user.Games.Add(game);
+            _context.Update(user);
+            _context.SaveChanges();
+            return View();
+        }
+
 
         private bool GameExists(int id)
         {

@@ -1,4 +1,9 @@
-﻿@model FRIDGamE.Models.Game
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model FRIDGamE.Models.Game
+@inject UserManager<FRIDGamEUser> UserManager
+
 
 @{
     ViewData["Title"] = "Kup grę";
@@ -38,6 +43,12 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-success" asp-action="BuyConfirm" asp-route-id="@Model?.Id">Kup</a>
+    <form asp-action="BuyConfirmed" method="post">
+        <input type="hidden" value="@Model.Id" name="GameId" />
+        <input type="hidden" name="UserId" value="@UserManager.GetUserId(User)"/>
+        <div class="form-group">
+            <input type="submit" value="Kup" class="btn btn-success" />
+        </div>
+    </form>
     <a class="btn btn-outline-secondary" asp-action="Index">Powrót</a>
 </div>
