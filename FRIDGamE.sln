@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRIDGamE", "FRIDGamE.csproj", "{892F7C14-AA76-4116-84AA-01A783CE614F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRIDGamE", "FRIDGamE.csproj", "{892F7C14-AA76-4116-84AA-01A783CE614F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRIDGamE-test", "..\FRIDGamE-test\FRIDGamE-test.csproj", "{AAB16E72-C9DD-4513-AF06-09A2C0A1661C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{892F7C14-AA76-4116-84AA-01A783CE614F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{892F7C14-AA76-4116-84AA-01A783CE614F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{892F7C14-AA76-4116-84AA-01A783CE614F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB16E72-C9DD-4513-AF06-09A2C0A1661C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB16E72-C9DD-4513-AF06-09A2C0A1661C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB16E72-C9DD-4513-AF06-09A2C0A1661C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB16E72-C9DD-4513-AF06-09A2C0A1661C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

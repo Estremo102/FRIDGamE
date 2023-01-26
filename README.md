@@ -37,4 +37,4 @@ Najprościej przetestować działanie API w rozszerzeniu do przeglądarki - narz
 GET, POST, DELETE, PUT lub UPDATE)
 
 # Testowanie aplikacji
-W projekcie są zaimplementowane testy jednostkowe kontrolera API. Aby je uruchomić należy prawym przyciskiem myszy kliknąć na GamesControllerTest i wybrać opcję "Uruchom testy".
+W projekcie są zaimplementowane testy jednostkowe kontrolera API. Aby je uruchomić należy prawym przyciskiem myszy kliknąć na PublishersControllerTest i wybrać opcję "Uruchom testy".
