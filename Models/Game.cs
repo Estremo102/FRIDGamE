@@ -20,7 +20,6 @@ namespace FRIDGamE.Models
         public Publisher? GamePublisher { get; set; }
         public int GamePublisherId { get; set; }
         public string Description { get; set; }
-
         public decimal RegularPrice { get; set; }
         public DateTime ReleaseDate { get; set; }
         public ISet<Customer> Owners { get; set; }

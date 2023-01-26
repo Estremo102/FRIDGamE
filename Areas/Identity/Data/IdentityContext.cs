@@ -13,6 +13,9 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
     public DbSet<Developer> Developers { get; set; }
     public DbSet<FRIDGamEUser> Users { get; set; }
     public DbSet<News> News { get; set; }
+    public DbSet<Promotion> Promotion { get; set; }
+
+    public DbSet<Customer> Customer { get; set; }
     public IdentityContext(DbContextOptions<IdentityContext> options)
         : base(options)
     {
@@ -152,8 +155,4 @@ public class IdentityContext : IdentityDbContext<FRIDGamEUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
-
-    public DbSet<FRIDGamE.Models.Promotion> Promotion { get; set; }
-
-    public DbSet<FRIDGamE.Models.Customer> Customer { get; set; }
 }

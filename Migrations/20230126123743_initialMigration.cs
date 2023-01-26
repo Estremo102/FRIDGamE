@@ -304,8 +304,8 @@ namespace FRIDGamE.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "34cb5842-05fe-4502-80ea-acddac81ec1e", "f8f346f5-622c-4474-a4df-bb84a34eac95", "Admin", "ADMIN" },
-                    { "a1b6d163-549c-44fc-a0a6-5a15596c0470", "7a1b4bb6-ddd7-4fa2-98bb-324c4b8a8730", "User", "USER" }
+                    { "2696ba93-ec93-4530-9675-9bcf60065575", "c5a961b5-fa90-4e2a-a7da-c56b6d40cad6", "User", "USER" },
+                    { "44a0b51b-c3f6-492b-9a10-d701f8f2f77f", "750e2fde-d66d-4bed-961c-d5ba93786bdf", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

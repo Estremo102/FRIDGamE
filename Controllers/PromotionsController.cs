@@ -100,8 +100,9 @@ namespace FRIDGamE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GameNameId,RegularPrice,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GameNameId,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
         {
+            promotion.RegularPrice = _context.Games.Find(promotion.GameNameId).RegularPrice;
             if (id != promotion.Id)
             {
                 return NotFound();
