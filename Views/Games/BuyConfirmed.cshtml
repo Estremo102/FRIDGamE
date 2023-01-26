@@ -1,7 +1,10 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Kupiono grę";
 }
-
-<h1>Dziękujemy za zakup</h1>
+@if ((bool)ViewData["Result"])
+{
+    <h1>Dziękujemy za zakup</h1>
+}else{
+    <h1>Brak wystarczających środków</h1>
+}
 

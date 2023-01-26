@@ -203,9 +203,16 @@ namespace FRIDGamE.Controllers
             {
                 return NotFound();
             }
+            user.Balance -= game.RegularPrice;
             user.Games.Add(game);
+            if(user.Balance < 0)
+            {
+                ViewData["Result"] = false;
+                return View();
+            }
             _context.Update(user);
             _context.SaveChanges();
+            ViewData["Result"] = true;
             return View();
         }
 

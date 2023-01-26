@@ -55,13 +55,16 @@ namespace FRIDGamE.Controllers
             {
                 return NotFound();
             }
-
+            //var customer = _context.Customer.Include(c => c.Games).First(c => c.CustomerId == Guid.Parse(id));
+            //var customer = customers.FirstOrDefault(c => c.CustomerId == Guid.Parse(id));
+            //customer.Games.Add(new Game() { GameName = "ABCD" });
+            //var account = _context.Customer.Include(c => c.Games).ToList();
+            //var customer = account.First(c => c.CustomerId == Guid.Parse(id));
             var customer = _context.Customer.Find(Guid.Parse(id));
             if (customer == null)
             {
                 return NotFound();
             }
-
             return View(customer);
         }
 
