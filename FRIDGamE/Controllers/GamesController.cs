@@ -23,7 +23,12 @@ namespace FRIDGamE.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
+            ViewData["Customers"] = _context.Customer.ToList(); 
             var identityContext = _context.Games.Include(g => g.GamePublisher).Include(g => g.Studio);
+            foreach(var game in identityContext)
+            {
+                _context.Entry(game).Collection(e => e.Owners).Load();
+            }
             return View(await identityContext.ToListAsync());
         }
 

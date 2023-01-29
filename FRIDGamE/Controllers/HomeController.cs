@@ -56,11 +56,11 @@ namespace FRIDGamE.Controllers
                 return NotFound();
             }
             var customer = _context.Customer.Find(Guid.Parse(id));
-            _context.Entry(customer).Collection(e => e.Games).Load();
             if (customer == null)
             {
                 return NotFound();
             }
+            _context.Entry(customer).Collection(e => e.Games).Load();
             return View(customer);
         }
 
