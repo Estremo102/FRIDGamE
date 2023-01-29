@@ -7,6 +7,21 @@
 <h1>Utwórz promocję</h1>
 
 <h4>Daj graczom szansę zdobyć grę po niższej cenie</h4>
+@if (ViewData["Success"] is not null && !(bool)ViewData["Success"])
+{
+    switch (ViewData["Error"])
+    {
+        case "1":
+            <div class="text-danger">już trwa promocja na grę w tym okresie</div>
+            break;
+        case "2":
+            <div class="text-danger">Start promocji musi być wcześniej niż jej koniec</div>
+            break;
+        default:
+            <div class="text-danger">Nieznany błąd</div>
+            break;
+    }
+}
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,5 +58,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

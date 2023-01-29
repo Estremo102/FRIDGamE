@@ -64,18 +64,28 @@ namespace FRIDGamE.Controllers
         {
             promotion.RegularPrice = _context.Games.Find(promotion.GameNameId).RegularPrice;
             var promotions = _context.Promotion.ToList();
-            foreach(var p in promotions)
+            if (promotion.StartOfPromotion is null)
+            {
+                promotion.StartOfPromotion = DateTime.Now;
+            }
+            foreach (var p in promotions)
             {
                 if(p.GameNameId == promotion.GameNameId &&
                     promotion.EndOfPromotion > p.StartOfPromotion &&
                     promotion.StartOfPromotion < p.EndOfPromotion)
                 {
-                    return NotFound();
+                    ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
+                    ViewData["Success"] = false;
+                    ViewData["Error"] = "1";
+                    return View(promotion);
                 }
             }
-            if (promotion.StartOfPromotion is null)
+            if(promotion.StartOfPromotion > promotion.EndOfPromotion)
             {
-                promotion.StartOfPromotion = DateTime.Now;
+                ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
+                ViewData["Success"] = false;
+                ViewData["Error"] = "2";
+                return View(promotion);
             }
             if (ModelState.IsValid)
             {
@@ -84,6 +94,7 @@ namespace FRIDGamE.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GameNameId"] = new SelectList(_context.Games, "Id", "GameName", promotion.GameNameId);
+            ViewData["Success"] = true;
             return View(promotion);
         }
 
