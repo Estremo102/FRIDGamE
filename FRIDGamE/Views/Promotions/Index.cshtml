@@ -49,7 +49,13 @@
                         -@Html.DisplayFor(modelItem => item.Discount)%
                     </td>
                     <td>
-                        @if ((item.EndOfPromotion - DateTime.Now).Days > 1)
+                        @if((item.StartOfPromotion - DateTime.Now).Value.Days > 0)
+                        {
+                            <div>
+                                Promocja zaczyna się za @((item.StartOfPromotion - DateTime.Now).Value.Days) dni
+                            </div>
+                        }
+                        else if ((item.EndOfPromotion - DateTime.Now).Days > 1)
                         {
                             <div>
                                 Promocja kończy się za @((item.EndOfPromotion - DateTime.Now).Days) dni
@@ -82,7 +88,7 @@
                     </td>
                 </tr>
             }
-            else if ((item.EndOfPromotion - DateTime.Now).Days >= 0)
+            else if ((item.EndOfPromotion - DateTime.Now).Days >= 0 && (item.StartOfPromotion - DateTime.Now).Value.Days <= 0)
             {
 
                 <tr>
