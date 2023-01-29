@@ -63,6 +63,16 @@ namespace FRIDGamE.Controllers
         public async Task<IActionResult> Create([Bind("Id,GameNameId,Discount,StartOfPromotion,EndOfPromotion")] Promotion promotion)
         {
             promotion.RegularPrice = _context.Games.Find(promotion.GameNameId).RegularPrice;
+            var promotions = _context.Promotion.ToList();
+            foreach(var p in promotions)
+            {
+                if(p.GameNameId == promotion.GameNameId &&
+                    promotion.EndOfPromotion > p.StartOfPromotion &&
+                    promotion.StartOfPromotion < p.EndOfPromotion)
+                {
+                    return NotFound();
+                }
+            }
             if (promotion.StartOfPromotion is null)
             {
                 promotion.StartOfPromotion = DateTime.Now;
